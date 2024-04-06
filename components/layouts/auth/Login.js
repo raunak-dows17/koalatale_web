@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { authenticateUser } from "@/utils/apis/auth";
-import { HiCamera } from "react-icons/hi2";
 import { IoEye, IoEyeOff } from "react-icons/io5";
 import { IoMdClose } from "react-icons/io";
 import { FaCheck } from "react-icons/fa6";
