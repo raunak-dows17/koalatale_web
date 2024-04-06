@@ -180,7 +180,8 @@ const GetStarted = () => {
             </div>
             <div className="p-5 w-full h-60 space-y-2 bg-primaryColor/50 rounded-lg ">
               <p className="text-white text-center">
-                Vote on your favorite parts to influence the story's direction.
+                Vote on your favorite parts to influence the story&lsquo;s
+                direction.
               </p>
             </div>
           </div>
