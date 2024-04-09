@@ -69,10 +69,11 @@ const GetStarted = () => {
               Koalatale is a collaborative stroytelling platform. Write,
               contribute and vote on contributions of fellow writers!
             </p>
-            <Image
-              src={require("@/public/images/gs2.jpg")}
+            <img
+              src={
+                "https://cdn.www.wesleyan.org/wesleyanit/wp-content/uploads/whats-your-story-5026.jpg"
+              }
               alt=""
-              priority
               className="w-full aspect-video rounded-lg object-fill"
             />
           </div>
@@ -85,14 +86,14 @@ const GetStarted = () => {
           </Link>
           <p
             type="button"
-            className="text-primaryColor cursor-pointer text-pretty px-7 py-1 rounded self-center"
+            className="text-primaryColor md:block hidden cursor-pointer text-pretty px-7 py-1 rounded self-center"
           >
             Scroll to know more
           </p>
         </div>
-        <div className="flex-1 md:static absolute inset-0 -z-10">
+        <div className="flex-1 lg:static absolute inset-0 -z-10">
           <Image
-            src={require("@/public/images/gs1.jpg")}
+            src={require("@/public/images/gs5.jpg")}
             alt=""
             className="object-fill size-full"
             placeholder="blur"
@@ -144,7 +145,7 @@ const GetStarted = () => {
             Scroll to know more
           </p>
         </div>
-        <div className="flex-1 md:static absolute inset-0 -z-10">
+        <div className="flex-1 lg:static absolute inset-0 -z-10">
           <Image
             src={require("@/public/images/gs8.jpg")}
             alt=""
@@ -193,7 +194,7 @@ const GetStarted = () => {
             Become a part of koalatale community
           </Link>
         </div>
-        <div className="flex-1 md:static absolute inset-0 -z-10">
+        <div className="flex-1 lg:static absolute inset-0 -z-10">
           <Image
             src={require("@/public/images/gs9.jpg")}
             alt=""

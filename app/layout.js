@@ -1,5 +1,7 @@
 import { Kumbh_Sans } from "next/font/google";
 import "./globals.css";
+import Navbar from "@/components/modules/navbar/navbar";
+import SideNavbar from "@/components/modules/sidenavbar/SideNavbar";
 
 const kumbh = Kumbh_Sans({ subsets: ["latin"] });
 
