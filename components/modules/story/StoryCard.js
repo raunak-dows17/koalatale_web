@@ -22,7 +22,7 @@ const StoryCard = ({ author, content, contributions, title, _id, votes }) => {
             className="w-4 aspect-square object-fill"
           />
         </div>
-        <p className="flex-grow">{content[0]?.text.slice(0, 100)}...</p>
+        <p className="flex-grow">{content[0]?.text?.slice(0, 100)}...</p>
         <p
           onClick={(e) => {
             e.stopPropagation();
@@ -47,7 +47,7 @@ const StoryCard = ({ author, content, contributions, title, _id, votes }) => {
                 className="bg-slate-500 w-4 aspect-square -ml-2 rounded-full object-cover"
               />
             ))}
-            {contributions.length > 3 && (
+            {contributions?.length > 3 && (
               <div className="bg-slate-500 w-4 aspect-square -ml-2 rounded-full object-cover">
                 +{contributions?.length - 3}
               </div>

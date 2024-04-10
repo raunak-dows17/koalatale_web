@@ -44,7 +44,7 @@ const Navbar = ({ hasToken }) => {
           ) : (
             <img
               src={
-                userData.profileImage ||
+                userData?.profileImage ||
                 `https://dummyimage.com/100x100/${randomColor}/fff.png&text=${userData?.name.charAt(
                   0
                 )}`

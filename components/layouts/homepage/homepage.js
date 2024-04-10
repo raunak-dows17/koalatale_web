@@ -12,14 +12,21 @@ const Homepage = () => {
     <div className="size-full">
       <LinearLoader />
     </div>
-  ) : stories || !error ? (
-    <div className="grid grid-cols-4 justify-center items-center">
+  ) : stories ? (
+    <div className="grid 2xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 justify-center items-center">
       {stories?.map((story) => (
         <StoryCard {...story} key={story._id} />
       ))}
     </div>
+  ) : error ? (
+    <div className="flex justify-center items-center size-full text-red-600 text-lg">
+      {error?.message || error || "Something went wrong"}
+    </div>
   ) : (
-    <div className=""></div>
+    <div className="flex justify-center items-center size-full text-primaryColor text-lg">
+      No Stroies Yet as the koalatale is new. Be the firstr to upload you
+      thoughts
+    </div>
   );
 };
 

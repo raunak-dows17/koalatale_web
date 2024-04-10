@@ -1,5 +1,6 @@
 "use client";
 
+import ContributionCard from "@/components/modules/contribution/contributionCard";
 import SkeletonLoader from "@/components/modules/loader/SkeletonLoader";
 import StoryCard from "@/components/modules/story/StoryCard";
 import { usePersonalData, userDetail } from "@/utils/hooks/userData";
@@ -48,23 +49,23 @@ const UsersDetails = ({ username, _id }) => {
             <h3 className="text-2xl">
               {_id ? "My " : `${username}'s `}Stories
             </h3>
-            <div className="grid size-full grid-cols-1 overflow-y-auto overflow-x-hidden">
+            <div className="grid size-full grid-cols-1 gap-2 overflow-y-auto overflow-x-hidden">
               {_id ? (
-                userData?.stories.length === 0 ? (
+                userData?.stories?.length === 0 ? (
                   <div className="flex size-full justify-center items-center gap-2 text-red-500 text-base text-pretty">
                     <FaCircleExclamation /> <span> No Stories By You</span>
                   </div>
                 ) : (
-                  userData?.stories.map((story) => (
+                  userData?.stories?.map((story) => (
                     <StoryCard {...story} key={story._id} />
                   ))
                 )
-              ) : usersData?.stories.length === 0 ? (
+              ) : usersData?.stories?.length === 0 ? (
                 <div className="flex size-full justify-center items-center gap-2 text-red-500 text-base text-pretty">
                   <FaCircleExclamation /> <span> No Stories By {username}</span>
                 </div>
               ) : (
-                usersData?.stories.map((story) => (
+                usersData?.stories?.map((story) => (
                   <StoryCard {...story} key={story._id} />
                 ))
               )}
@@ -80,7 +81,7 @@ const UsersDetails = ({ username, _id }) => {
             <h3 className="text-2xl">
               {_id ? "My " : `${username}'s `}Contribution
             </h3>
-            <div className="grid size-full grid-cols-1 overflow-y-auto overflow-x-hidden">
+            <div className="grid size-full grid-cols-1 gap-2 overflow-y-auto overflow-x-hidden">
               {_id ? (
                 userData?.contributions.length === 0 ? (
                   <div className="flex size-full justify-center items-center gap-2 text-red-500 text-base text-pretty">
@@ -88,18 +89,21 @@ const UsersDetails = ({ username, _id }) => {
                     <span> No Contributions By You</span>
                   </div>
                 ) : (
-                  userData?.contributions.map((story) => (
-                    <StoryCard {...story} key={story._id} />
+                  userData?.contributions?.map((contribution) => (
+                    <ContributionCard
+                      {...contribution}
+                      key={contribution._id}
+                    />
                   ))
                 )
-              ) : usersData?.contributions.length === 0 ? (
+              ) : usersData?.contributions?.length === 0 ? (
                 <div className="flex size-full justify-center items-center gap-2 text-red-500 text-base text-pretty">
                   <FaCircleExclamation />{" "}
                   <span> No Contributions By {username}</span>
                 </div>
               ) : (
-                usersData?.contributions.map((story) => (
-                  <StoryCard {...story} key={story._id} />
+                usersData?.contributions?.map((contribution) => (
+                  <ContributionCard {...contribution} key={contribution._id} />
                 ))
               )}
             </div>
