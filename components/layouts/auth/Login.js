@@ -27,6 +27,8 @@ const Login = () => {
     if (name === "username") {
       if (value?.includes(" ")) {
         setUsernameValidationError("Username cannot contains spaces");
+      } else {
+        setUsernameValidationError(null);
       }
     }
   };
@@ -98,7 +100,7 @@ const Login = () => {
             Welcome Back to Koalatale
           </h1>
           <p className="text-2xl text-primaryColor/90">
-            Koala is hppy to see you again!!!
+            Koala is happy to see you again!!!
           </p>
         </div>
         <form
@@ -165,7 +167,7 @@ const Login = () => {
             disabled={
               formData.username === "" ||
               formData.password === "" ||
-              usernameValidationError === null
+              usernameValidationError !== null
             }
             type="submit"
             className="text-white w-full flex justify-center items-center py-3 rounded-xl bg-primaryColor disabled:opacity-50 disabled:cursor-not-allowed"

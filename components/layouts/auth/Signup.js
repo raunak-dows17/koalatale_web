@@ -110,17 +110,17 @@ const Signup = () => {
 
   return (
     <main className="w-11/12 h-screen overflow-hidden flex justify-center items-center mx-auto">
-      <div className="flex-1 size-full md:py-12 md:sticky md:top-0 fixed inset-0 -z-10">
+      <div className="flex-1 size-full lg:py-12 lg:sticky lg:top-0 fixed inset-0 -z-10">
         <Image
-          src={require("@/public/images/signupImage.jpg")}
+          src={require("@/public/images/gs3.jpg")}
           alt=""
           priority
           placeholder="blur"
-          className="size-full object-fill md:rounded-lg"
+          className="size-full object-fill lg:rounded-lg"
         />
       </div>
-      <div className="md:flex-1 shrink-0 p-5 md:py-12 flex flex-col rounded-3xl size-full justify-between md:items-center gap-10 space-y-10 md:bg-transparent bg-white/60 overflow-auto">
-        <div className="w-full text-center space-y-5">
+      <div className="lg:flex-1 shrink-0 p-5 lg:py-12 flex flex-col rounded-3xl size-full justify-between lg:items-center md:gap-10 gap-5 lg:space-y-10 lg:bg-transparent bg-white/60 overflow-auto">
+        <div className="w-full text-center md:space-y-5">
           <h1 className="text-3xl text-primaryColor">Welcome to Koalatale</h1>
           <p className="text-2xl text-primaryColor/90">
             Start your Koalatale story!!!
