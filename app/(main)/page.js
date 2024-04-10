@@ -12,5 +12,5 @@ export default function Page() {
     setToken(() => TokenDetails.hasToken());
   }, []);
 
-  return hasToken ? <Homepage /> : <GetStarted />;
+  return !hasToken ? <Homepage /> : <GetStarted />;
 }
