@@ -48,7 +48,7 @@ const GetStarted = () => {
         });
         e.currentTarget.startTouchY = touchY;
       }}
-      className="overflow-y-hidden fixed inset-0 max-h-screen"
+      className="overflow-y-hidden fixed inset-0 bg-[#eceff0] max-h-screen"
     >
       <div className="flex h-screen justify-center overflow-hidden relative">
         <div
