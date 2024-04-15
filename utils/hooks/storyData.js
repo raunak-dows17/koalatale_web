@@ -17,3 +17,18 @@ export function useStories() {
 
   return { stories, loading, error };
 }
+
+export function useStory(id) {
+  const [story, setStory] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    StoryDetails.getStoryById(id)
+      .then((data) => setStory(data))
+      .catch((err) => setError(err))
+      .finally(() => setLoading(false));
+  }, []);
+
+  return { story, loading, error };
+}

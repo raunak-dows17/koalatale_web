@@ -20,7 +20,7 @@ const Navbar = ({ hasToken }) => {
   return (
     <nav
       className={`w-full ${hasToken ? "block" : "hidden"}
-       py-2 rounded-b-lg bg-primaryColor/35 fixed inset-x-0 top-0`}
+       py-2 rounded-b-lg bg-primaryColor/35`}
     >
       <div className="flex justify-between items-center w-11/12 mx-auto">
         <div className="flex justify-center items-center gap-5">

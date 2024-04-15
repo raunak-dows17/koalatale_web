@@ -7,35 +7,95 @@ import { usePersonalData, userDetail } from "@/utils/hooks/userData";
 import { generateRandomColor } from "@/utils/randomColor";
 import React, { useEffect, useState } from "react";
 import { FaCircleExclamation, FaExclamation } from "react-icons/fa6";
+import { IoCamera } from "react-icons/io5";
 
 const UsersDetails = ({ username, _id }) => {
   const { userData, loading, error } = usePersonalData();
   const { usersData } = userDetail(_id ? null : username);
   const [randomColor, setRandomColor] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
     setRandomColor(generateRandomColor());
   }, []);
 
   return (
-    <div className="grid grid-cols-2 gap-7 size-full">
-      <div className="col-span-2 row-span-2 size-full bg-primaryColor/20 rounded-2xl overflow-hidden">
+    <div className="grid grid-row-2 gap-7 size-full p-5">
+      <div className="col-span-2 size-full bg-primaryColor/20 rounded-2xl overflow-hidden">
         {loading ? (
           <SkeletonLoader />
         ) : (
-          <div className="flex flex-col gap-3 p-5">
+          <div className="flex flex-col justify-between gap-3 p-5">
             <div className="flex-wrap flex gap-2">
-              {!_id && (
+              {_id ? (
+                <div className="relative">
+                  <img
+                    src={
+                      userData?.profileImage ||
+                      `https://dummyimage.com/100x100/${randomColor}/fff.png&text=${userData?.name?.charAt(
+                        0
+                      )}`
+                    }
+                    alt=""
+                    className="w-12 aspect-square rounded-full object-cover"
+                  />
+                  {isEditing && (
+                    <label htmlFor="profileImage absolute">
+                      <IoCamera />
+                    </label>
+                  )}
+                </div>
+              ) : (
                 <img
                   src={
                     usersData?.profileImage ||
-                    `https://dummyimage.com/100x100/${randomColor}/fff.png&text=${userData?.name?.charAt(
+                    `https://dummyimage.com/100x100/${randomColor}/fff.png&text=${usersData?.name?.charAt(
                       0
                     )}`
                   }
                   alt=""
                   className="w-12 aspect-square rounded-full object-cover"
                 />
+              )}
+              {_id ? (
+                <div>
+                  <p className="text-pretty">{userData?.username}</p>{" "}
+                  <p className="text-primaryColor text-pretty font-semibold">
+                    {userData?.name}
+                  </p>
+                </div>
+              ) : (
+                <div className="">
+                  <p className="text-pretty">{usersData?.username}</p>{" "}
+                  <p className="text-primaryColor text-pretty font-semibold">
+                    {usersData?.name}
+                  </p>
+                </div>
+              )}
+            </div>
+            {_id ? (
+              <div>
+                <p className="text-pretty">Contact Number</p>{" "}
+                <p className="text-primaryColor text-pretty font-semibold">
+                  {userData?.phoneNumber}
+                </p>
+              </div>
+            ) : (
+              <div className="">
+                <p className="text-pretty">Contact Number</p>{" "}
+                <p className="text-primaryColor text-pretty font-semibold">
+                  {usersData?.phoneNumber}
+                </p>
+              </div>
+            )}
+            <div className="size-full">
+              {_id && (
+                <button
+                  type="button"
+                  className="bg-primaryColor text-secondaryColor px-7 py-2 rounded"
+                >
+                  Edit Profile Info
+                </button>
               )}
             </div>
           </div>
@@ -46,8 +106,11 @@ const UsersDetails = ({ username, _id }) => {
           <SkeletonLoader />
         ) : (
           <div className="flex flex-col gap-3 p-5">
-            <h3 className="text-2xl">
+            <h3 className="text-2xl flex items-center justify-between">
               {_id ? "My " : `${username}'s `}Stories
+              <span className="text-primaryColor font-bold">
+                {_id ? userData?.stories?.length : usersData?.stories?.length}
+              </span>
             </h3>
             <div className="grid size-full grid-cols-1 gap-2 overflow-y-auto overflow-x-hidden">
               {_id ? (
@@ -78,8 +141,13 @@ const UsersDetails = ({ username, _id }) => {
           <SkeletonLoader />
         ) : (
           <div className="flex flex-col gap-3 p-5">
-            <h3 className="text-2xl">
-              {_id ? "My " : `${username}'s `}Contribution
+            <h3 className="text-2xl flex items-center justify-between">
+              {_id ? "My " : `${username}'s `}Contributions
+              <span className="text-primaryColor font-bold">
+                {_id
+                  ? userData?.contributions?.length
+                  : usersData?.contributions?.length}
+              </span>
             </h3>
             <div className="grid size-full grid-cols-1 gap-2 overflow-y-auto overflow-x-hidden">
               {_id ? (

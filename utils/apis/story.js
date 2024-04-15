@@ -19,4 +19,22 @@ export const StoryDetails = {
       return Promise.reject(error?.response?.data);
     }
   },
+
+  getStoryById: async (id) => {
+    try {
+      if (TokenDetails.getToken) {
+        const response = await instance.get(`/story/${id}`, {
+          headers: {
+            token: TokenDetails.getToken(),
+          },
+        });
+
+        return Promise.resolve(response.data);
+      } else {
+        return null;
+      }
+    } catch (error) {
+      return Promise.reject(error?.response?.data);
+    }
+  },
 };

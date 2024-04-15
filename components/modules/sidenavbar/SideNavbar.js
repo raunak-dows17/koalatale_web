@@ -60,35 +60,44 @@ const SideNavbar = ({ showMenu, setShowMenu, hasToken }) => {
       </button>
       <ul>
         <li
-          onClick={() => router.push("/")}
+          onClick={() => {
+            router.push("/");
+            showMenu && setShowMenu(!showMenu);
+          }}
           className={`flex items-center gap-2 cursor-pointer ${
             pathname === "/" ? "bg-primaryColor/25" : "bg-transparent"
-          } text-primaryColor px-5 py-3 rounded-lg hover:bg-primaryColor/25`}
+          } text-primaryColor px-7 py-5 font-semibold tracking-widest rounded-lg hover:bg-primaryColor/25`}
         >
           <IoHome />
-          HomePage
+          HOMEPAGE
         </li>
         <li
-          onClick={() => router.push("/story/my-stories")}
+          onClick={() => {
+            router.push("/story/my-stories");
+            showMenu && setShowMenu(!showMenu);
+          }}
           className={`flex items-center gap-2 cursor-pointer ${
             pathname === "/story/my-stories"
               ? "bg-primaryColor/25"
               : "bg-transparent"
-          } text-primaryColor px-5 py-3 rounded-lg hover:bg-primaryColor/25`}
+          } text-primaryColor px-7 py-5 font-semibold tracking-widest rounded-lg hover:bg-primaryColor/25`}
         >
           <IoBook />
-          My Stories
+          MY STORIES
         </li>
         <li
-          onClick={() => router.push("/contributions/my-contributions")}
+          onClick={() => {
+            router.push("/contributions/my-contributions");
+            showMenu && setShowMenu(!showMenu);
+          }}
           className={`flex items-center gap-2 cursor-pointer ${
             pathname === "/contributions/my-contributions"
               ? "bg-primaryColor/25"
               : "bg-transparent"
-          } text-primaryColor px-5 py-3 rounded-lg hover:bg-primaryColor/25`}
+          } text-primaryColor px-7 py-5 font-semibold tracking-widest rounded-lg hover:bg-primaryColor/25`}
         >
           <IoArchive />
-          Contributions
+          MY CONTRIBUTIONS
         </li>
       </ul>
     </div>
