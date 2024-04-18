@@ -1,3 +1,4 @@
+import { TokenDetails } from "../tokendetails/tokeDetails";
 import { instance } from "./axiosInstance";
 
 export const authenticateUser = {
@@ -53,6 +54,27 @@ export const authenticateUser = {
       return Promise.resolve(response?.data?.message);
     } catch (error) {
       return Promise.reject(error.response.data);
+    }
+  },
+
+  changePassword: async (changedPassword) => {
+    try {
+      if (!TokenDetails.getToken()) {
+        return null;
+      }
+      const response = await instance.put(
+        "/auth/updatePassword",
+        changedPassword,
+        {
+          headers: {
+            token: TokenDetails.getToken(),
+          },
+        }
+      );
+
+      return Promise.resolve(response.data);
+    } catch (error) {
+      return Promise.reject(error?.response?.data);
     }
   },
 };

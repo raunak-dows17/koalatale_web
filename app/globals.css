@@ -177,3 +177,13 @@ input:focus {
     background-position: left -102% top 0%;
   }
 }
+
+button:focus {
+  outline: none;
+  ;
+}
+
+input:focus {
+  outline: none;
+  ;
+}

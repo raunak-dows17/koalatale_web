@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import SkeletonLoader from "../loader/SkeletonLoader";
 import { generateRandomColor } from "@/utils/randomColor";
 import { usePathname, useRouter } from "next/navigation";
-import { IoArchive, IoBook, IoHome } from "react-icons/io5";
+import { IoAddCircle, IoArchive, IoBook, IoHome } from "react-icons/io5";
 import { usePersonalData } from "@/utils/hooks/userData";
 
 const SideNavbar = ({ showMenu, setShowMenu, hasToken }) => {
@@ -19,15 +19,16 @@ const SideNavbar = ({ showMenu, setShowMenu, hasToken }) => {
 
   return (
     <div
-      className={`size-full sticky lg:top-16 inset-y-0 bg-white lg:rounded-none rounded-r-xl overflow-hidden`}
+      className={`size-full sticky lg:top-16 inset-y-0 bg-white lg:rounded-none rounded-r-xl overflow-hidden z-10`}
     >
       <button
         type="button"
-        onClick={() =>
+        onClick={() => {
           router.push(
             `/user/${userData?.username}/${userData?.email}/${userData?._id}`
-          )
-        }
+          );
+          showMenu && setShowMenu(!showMenu);
+        }}
         className="relative flex h-1/3 w-full justify-end flex-col p-5 gap-2 bg-black/25"
       >
         <div className="-z-10 absolute inset-0 overflow-hidden">
@@ -84,6 +85,20 @@ const SideNavbar = ({ showMenu, setShowMenu, hasToken }) => {
         >
           <IoBook />
           MY STORIES
+        </li>
+        <li
+          onClick={() => {
+            router.push("/story/addstory");
+            showMenu && setShowMenu(!showMenu);
+          }}
+          className={`flex items-center gap-2 cursor-pointer ${
+            pathname === "/story/addstory"
+              ? "bg-primaryColor/25"
+              : "bg-transparent"
+          } text-primaryColor px-7 py-5 font-semibold tracking-widest rounded-lg hover:bg-primaryColor/25`}
+        >
+          <IoAddCircle className="text-lg" />
+          Add Story
         </li>
         <li
           onClick={() => {

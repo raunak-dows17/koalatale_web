@@ -1,14 +1,47 @@
-import { usePersonalData } from "@/utils/hooks/userData";
 import Link from "next/link";
 import React from "react";
 
-const StoryRight = ({ author, contributions }) => {
-  const { userData } = usePersonalData();
-
+const StoryRight = ({
+  author,
+  isCompleted,
+  contributions,
+  userData,
+  handleComplete,
+  isEditing,
+  setIsEditing,
+  fetchAgain,
+  handleUpdate,
+  handleDeleteStory,
+}) => {
   const uniqueAuthors = new Set();
 
   return (
-    <div className="bg-white size-full p-5 min-h-full space-y-5">
+    <div className="bg-white p-5 min-h-full space-y-5 flex flex-col md:rounded-none rounded">
+      {userData?._id === author?._id && (
+        <div className="flex justify-center items-center size-full gap-2">
+          <button
+            type="button"
+            onClick={() => (isEditing ? handleUpdate() : setIsEditing(true))}
+            className="px-5 py-1 rounded bg-primaryColor size-full text-secondaryColor"
+          >
+            {isEditing ? "Save" : "Edit"}
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              if (isEditing) {
+                setIsEditing(false);
+                fetchAgain();
+              } else {
+                handleDeleteStory();
+              }
+            }}
+            className="px-5 py-1 rounded bg-red-500 size-full text-secondaryColor"
+          >
+            {isEditing ? "Dismiss" : "Delete"}
+          </button>
+        </div>
+      )}
       <div className="author">
         Written By
         <Link
@@ -19,10 +52,10 @@ const StoryRight = ({ author, contributions }) => {
           }
           className="text-primaryColor font-semibold tracking-wide uppercase"
         >
-          ~{author?.username}
+          ~ {author?.username}
         </Link>
       </div>
-      <div className="contributedBy">
+      <div className="contributedBy max-h-[400px] overflow-auto">
         Contributors
         <div className="text-primaryColor flex flex-col tracking-wide space-y-1">
           {contributions
@@ -43,7 +76,8 @@ const StoryRight = ({ author, contributions }) => {
                 key={index}
                 className="flex items-center gap-2"
               >
-                ~
+                {" "}
+                ~{" "}
                 <img
                   src={
                     contri?.author?.profileImage ||
@@ -59,6 +93,15 @@ const StoryRight = ({ author, contributions }) => {
             ))}
         </div>
       </div>
+      {userData?._id === author?._id && (
+        <button
+          onClick={() => handleComplete()}
+          className="px-5 py-1.5 size-full border-primaryColor border-2 rounded"
+          type="button"
+        >
+          {isCompleted ? "Mark as Uncomplete" : "Mark As Complete"}
+        </button>
+      )}
     </div>
   );
 };

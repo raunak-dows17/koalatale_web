@@ -14,7 +14,9 @@ const StoryCard = ({ author, content, contributions, title, _id, votes }) => {
     >
       <div className="flex flex-col gap-3 justify-between size-full">
         <div className="flex justify-between items-center">
-          <p className="title">{title || ""}</p>
+          <p className="title text-lg font-semibold tracking-wide text-primaryColor">
+            {title || ""}
+          </p>
           <Image
             src={require("@/public/images/storyBook.png")}
             alt=""
@@ -33,22 +35,22 @@ const StoryCard = ({ author, content, contributions, title, _id, votes }) => {
           ~by <span>{author?.username}</span>
         </p>
         <hr />
-        <div className="flex gap-2 justify-between items-center">
-          <div className="contributions flex gap-2 items-center">
+        <div className="flex gap-3 justify-between items-center">
+          <div className="contributions flex gap-1 items-center">
             <p>Contributions</p>
             <p>{contributions?.length}</p>
           </div>
           <div className="flex items-center">
-            {contributions?.slice(0, 4)?.map((contribution) => (
+            {contributions?.slice(0, 3)?.map((contribution) => (
               <img
                 key={contribution?._id}
                 src={contribution.author?.profileImage}
                 alt=""
-                className="bg-slate-500 w-4 aspect-square -ml-2 rounded-full object-cover"
+                className="bg-slate-500 w-6 aspect-square shrink-0 -ml-3 rounded-full object-cover"
               />
             ))}
             {contributions?.length > 3 && (
-              <div className="bg-slate-500 w-4 aspect-square -ml-2 rounded-full object-cover">
+              <div className="bg-slate-500/50 p-1 text-xs shrink-0 aspect-square rounded-full object-cover">
                 +{contributions?.length - 3}
               </div>
             )}

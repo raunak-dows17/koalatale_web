@@ -1,6 +1,8 @@
 "use client";
 
 import Offline from "@/components/errors/Offline";
+import GetStarted from "@/components/layouts/getStarted/getstarted";
+import Footer from "@/components/modules/Footer/Footer";
 import Navbar from "@/components/modules/navbar/navbar";
 import SideNavbar from "@/components/modules/sidenavbar/SideNavbar";
 import { TokenDetails } from "@/utils/tokendetails/tokeDetails";
@@ -26,8 +28,8 @@ export default function RootLayout({ children }) {
 
   return isOffline ? (
     <Offline />
-  ) : (
-    <main className={`flex flex-col min-h-screen`}>
+  ) : hasToken ? (
+    <main className={`flex flex-col min-h-screen bg-[#eceff0]`}>
       <Navbar hasToken={hasToken} />
       <section className="flex flex-grow size-full">
         <div
@@ -39,6 +41,9 @@ export default function RootLayout({ children }) {
         </div>
         <div className="flex-grow">{children}</div>
       </section>
+      <Footer />
     </main>
+  ) : (
+    <GetStarted />
   );
 }

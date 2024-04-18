@@ -18,8 +18,7 @@ const Offline = () => {
       </h1>
       <p className="self-stretch mt-1 w-full text-2xl font-light text-center text-slate-800 text-opacity-50">
         {" "}
-        Oops! Looks like our connection got lost. Sorry, it looks like
-        you&apos;re off the grid.{" "}
+        Oops! Looks like your connection got lost.{" "}
       </p>
       <button
         onClick={() => window.location.reload()}

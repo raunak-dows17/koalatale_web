@@ -15,6 +15,10 @@ module.exports = {
         primaryColor: "#3B719F",
         secondaryColor: "#fff",
       },
+      borderColor: {
+        primaryColor: "#3B719F",
+        secondaryColor: "#fff",
+      },
     },
   },
   plugins: [],

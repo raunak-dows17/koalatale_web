@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { StoryDetails } from "../apis/story";
+import { StoryData } from "../apis/story";
 
 export function useStories() {
   const [stories, setStories] = useState(null);
@@ -9,7 +9,7 @@ export function useStories() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    StoryDetails.stories()
+    StoryData.stories()
       .then((data) => setStories(data?.stories))
       .catch((err) => setError(err))
       .finally(() => setLoading(false));
@@ -24,11 +24,19 @@ export function useStory(id) {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    StoryDetails.getStoryById(id)
+    StoryData.getStoryById(id)
       .then((data) => setStory(data))
       .catch((err) => setError(err))
       .finally(() => setLoading(false));
   }, []);
 
-  return { story, loading, error };
+  const fetchAgain = () => {
+    setLoading(true);
+    StoryData.getStoryById(id)
+      .then((data) => setStory(data))
+      .catch((err) => setError(err))
+      .finally(() => setLoading(false));
+  };
+
+  return { story, loading, error, fetchAgain };
 }

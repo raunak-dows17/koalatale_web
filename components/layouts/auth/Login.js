@@ -10,6 +10,7 @@ import { TokenDetails } from "@/utils/tokendetails/tokeDetails";
 import swal from "sweetalert2";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import Loader from "@/components/modules/loader/Loader";
 
 const Login = () => {
   const router = useRouter();
@@ -18,6 +19,7 @@ const Login = () => {
     password: "",
   });
 
+  const [loading, setLoading] = useState(false);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [usernameValidationError, setUsernameValidationError] = useState(null);
 
@@ -44,41 +46,43 @@ const Login = () => {
       authenticateUser
         .login(formData)
         .then((data) => {
-          console.log(data);
+          setLoading(true);
           TokenDetails.setToken(data?.token);
-          swal.fire({
-            icon: "success",
-            animation: true,
-            title: "Login Successfully 🐨",
-            text: data?.message,
-            confirmButtonColor: "#3B719F",
-            confirmButtonText: "Lets Go",
-            allowEnterKey: true,
-            allowEscapeKey: true,
-          });
-          router.replace("/");
+          swal
+            .fire({
+              icon: "success",
+              animation: true,
+              title: "Login Successfully 🐨",
+              text: data?.message,
+              timer: 1500,
+              showConfirmButton: false,
+            })
+            .then(() => router.replace("/"));
         })
         .catch((error) => {
-          console.error(error);
-          swal.fire({
-            title: "Cannot register you 🐨",
-            animation: true,
-            text:
-              error?.message ||
-              error ||
-              "Something went wrong please try after sometime",
-            icon: "error",
-            confirmButtonColor: "#3B719F",
-            confirmButtonText:
-              error?.message === "User not found"
-                ? "Signup"
-                : "Okay will try again!!",
-            allowEnterKey: true,
-            allowEscapeKey: true,
-          });
-          if (error?.message === "User not found") {
-            router.replace("/auth/signup");
-          }
+          setLoading(false);
+          swal
+            .fire({
+              title: "Cannot register you 🐨",
+              animation: true,
+              text:
+                error?.message ||
+                error ||
+                "Something went wrong please try after sometime",
+              icon: "error",
+              confirmButtonColor: "#3B719F",
+              confirmButtonText:
+                error?.message === "User not found"
+                  ? "Signup"
+                  : "Okay will try again!!",
+              allowEnterKey: true,
+              allowEscapeKey: true,
+            })
+            .then(() => {
+              if (error?.message === "User not found") {
+                router.replace("/auth/signup");
+              }
+            });
         });
     }
   }
@@ -167,16 +171,17 @@ const Login = () => {
             disabled={
               formData.username === "" ||
               formData.password === "" ||
-              usernameValidationError !== null
+              usernameValidationError !== null ||
+              loading
             }
             type="submit"
             className="text-white w-full flex justify-center items-center py-3 rounded-xl bg-primaryColor disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            Login
+            {loading ? <Loader loaderWidth={16} /> : "Login"}
           </button>
         </form>
         <p className="">
-          Never Joinned Koalatale?{" "}
+          Never Joined Koalatale?{" "}
           <Link href={"/auth/signup"} className="text-primaryColor">
             Join Us
           </Link>

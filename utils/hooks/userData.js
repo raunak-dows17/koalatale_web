@@ -15,7 +15,14 @@ export function usePersonalData() {
       .finally(() => setLoading(false));
   }, []);
 
-  return { userData, error, loading };
+  const fetchAgain = () => {
+    UserData.getPersonalInfo()
+      .then((data) => setUserData(data))
+      .catch((err) => setError(err))
+      .finally(() => setLoading(false));
+  };
+
+  return { userData, error, loading, fetchAgain };
 }
 
 export function userDetail(username) {

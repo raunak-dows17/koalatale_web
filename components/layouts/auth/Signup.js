@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { authenticateUser } from "@/utils/apis/auth";
 import { HiCamera } from "react-icons/hi2";
@@ -11,6 +11,8 @@ import { TokenDetails } from "@/utils/tokendetails/tokeDetails";
 import swal from "sweetalert2";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import Loader from "@/components/modules/loader/Loader";
+import { generateRandomColor } from "@/utils/randomColor";
 
 const Signup = () => {
   const router = useRouter();
@@ -26,6 +28,12 @@ const Signup = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [usernameValidationError, setUsernameValidationError] = useState(null);
   const [emailValidationError, setEmailValidationError] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [randomColor, setRandomColor] = useState(null);
+
+  useEffect(() => {
+    setRandomColor(generateRandomColor());
+  }, []);
 
   const createImageUrl = (file) => {
     if (!file) return;
@@ -69,41 +77,43 @@ const Signup = () => {
       authenticateUser
         .signUp(formData)
         .then((data) => {
-          console.log(data);
+          setLoading(true);
           TokenDetails.setToken(data?.token);
-          swal.fire({
-            icon: "success",
-            animation: true,
-            title: "Registration Completed 🐨",
-            text: data?.message,
-            confirmButtonColor: "#3B719F",
-            confirmButtonText: "Lets Go",
-            allowEnterKey,
-            allowEscapeKey,
-          });
-          router.replace("/");
+          swal
+            .fire({
+              icon: "success",
+              animation: true,
+              title: "Registration Completed 🐨",
+              text: data?.message,
+              timer: 1500,
+              showConfirmButton: false,
+            })
+            .then(() => router.replace("/"));
         })
         .catch((error) => {
-          console.error(error);
-          swal.fire({
-            title: "Cannot register you 🐨",
-            animation: true,
-            text:
-              error?.message ||
-              error ||
-              "Something went wrong please try after sometime",
-            icon: "error",
-            confirmButtonColor: "#3B719F",
-            confirmButtonText:
-              error === "User already exists"
-                ? "Login"
-                : "Okay will try again!!",
-            allowEnterKey,
-            allowEscapeKey,
-          });
-          if (error === "User already exists") {
-            router.replace("/auth/login");
-          }
+          setLoading(false);
+          swal
+            .fire({
+              title: "Cannot register you 🐨",
+              animation: true,
+              text:
+                error?.message ||
+                error ||
+                "Something went wrong please try after sometime",
+              icon: "error",
+              confirmButtonColor: "#3B719F",
+              confirmButtonText:
+                error === "User already exists"
+                  ? "Login"
+                  : "Okay will try again!!",
+              allowEnterKey,
+              allowEscapeKey,
+            })
+            .then(() => {
+              if (error === "User already exists") {
+                router.replace("/auth/login");
+              }
+            });
         });
     }
   }
@@ -112,41 +122,43 @@ const Signup = () => {
     <main className="w-11/12 h-screen overflow-hidden flex justify-center items-center mx-auto">
       <div className="flex-1 size-full lg:py-12 lg:sticky lg:top-0 fixed inset-0 -z-10">
         <Image
-          src={require("@/public/images/gs3.jpg")}
+          src={require("@/public/images/signupImage.jpg")}
           alt=""
           priority
           placeholder="blur"
           className="size-full object-fill lg:rounded-lg"
         />
       </div>
-      <div className="lg:flex-1 shrink-0 p-5 lg:py-12 flex flex-col rounded-3xl size-full justify-between lg:items-center md:gap-10 gap-5 lg:space-y-10 lg:bg-transparent bg-white/60 overflow-auto">
-        <div className="w-full text-center md:space-y-5">
-          <h1 className="text-3xl text-primaryColor">Welcome to Koalatale</h1>
-          <p className="text-2xl text-primaryColor/90">
+      <div className="lg:flex-1 p-5 lg:py-12 flex flex-col rounded-3xl size-full justify-between lg:items-center md:gap-10 gap-10 lg:bg-transparent bg-white/60 overflow-auto">
+        <div className="size-full text-center md:space-y-5">
+          <h1 className="sm:text-3xl text-xl text-primaryColor">
+            Welcome to Koalatale
+          </h1>
+          <p className="sm:text-2xl text-lg text-primaryColor/90">
             Start your Koalatale story!!!
           </p>
         </div>
         <form
           action=""
           method="post"
-          className="flex size-full flex-col gap-4 items-center justify-center"
+          className="flex size-full flex-grow flex-col gap-4 items-center justify-center"
           onSubmit={handleSubmit}
         >
           <div className="w-fit relative flex items-center justify-center">
-            <Image
+            <img
               src={
                 createImageUrl(formData.profilePicture) ||
-                require("@/public/images/gs6.jpg")
+                `https://dummyimage.com/100x100/${randomColor}/fff.png&text=${
+                  formData?.name?.charAt(0) || "K"
+                }`
               }
-              width={150}
-              height={150}
-              priority
+              loading="lazy"
               alt=""
-              className="size-32 aspect-square rounded-full"
+              className="xl:size-32 lg:size-28 sm:size-24 size-20 aspect-square rounded-full"
             />
             <label
               htmlFor="profilePicture"
-              className="absolute p-1 rounded-full bottom-0.5 right-0.5 bg-white/50 cursor-pointer"
+              className="absolute p-1 rounded-full xl:bottom-1.5 xl:right-1.5 bottom-0.5 right-0.5 bg-white/50 cursor-pointer"
             >
               <HiCamera className="text-primaryColor" />
               <input
@@ -179,7 +191,7 @@ const Signup = () => {
             />
           </div>
           <div className="w-full flex flex-col gap-1">
-            <label htmlFor="username" classUsername="text-primaryColor">
+            <label htmlFor="username" className="text-primaryColor">
               Username
             </label>
             <div
@@ -297,15 +309,16 @@ const Signup = () => {
               formData.username === "" ||
               formData.email === "" ||
               formData.password === "" ||
-              formData.phoneNumber === ""
+              formData.phoneNumber === "" ||
+              loading
             }
             type="submit"
             className="text-white w-full flex justify-center items-center py-3 rounded-xl bg-primaryColor disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            Join Us
+            {loading ? <Loader loaderWidth={16} /> : "Join Us"}
           </button>
         </form>
-        <p className="">
+        <p className="size-full text-center">
           Already Joinned Koalatale?{" "}
           <Link href={"/auth/login"} className="text-primaryColor">
             Login

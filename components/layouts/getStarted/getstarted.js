@@ -25,7 +25,7 @@ const GetStarted = () => {
   };
 
   return (
-    <div
+    <main
       ref={containerRef}
       onScroll={() =>
         scroll({
@@ -53,14 +53,15 @@ const GetStarted = () => {
       <div className="flex h-screen justify-center overflow-hidden relative">
         <div
           id="gs1"
-          className="md:flex-1 py-4 md:px-10 px-5 md:size-full size-5/6 rounded-3xl m-auto flex justify-between flex-col gap-4 md:bg-transparent bg-white/50"
+          key="gs1"
+          className="md:flex-1 py-4 md:px-10 px-5 md:size-full h-fit size-5/6 rounded-3xl m-auto flex justify-between flex-col gap-4 md:bg-transparent bg-white/50"
         >
           {/* Headline */}
           <div className="space-y-4">
-            <h1 className="text-primaryColor font-semibold text-center md:text-3xl text-xl">
+            <h1 className="text-primaryColor font-semibold text-center md:text-3xl text-2xl">
               Welcome to Koalatale
             </h1>
-            <p className="text-primaryColor/75 text-center md:text-xl">
+            <p className="text-secondaryColor lg:text-primaryColor/75 text-center md:text-xl">
               Unfold Stories, Create Connections
             </p>
           </div>
@@ -70,6 +71,7 @@ const GetStarted = () => {
               contribute and vote on contributions of fellow writers!
             </p>
             <img
+              loading="lazy"
               src={
                 "https://cdn.www.wesleyan.org/wesleyanit/wp-content/uploads/whats-your-story-5026.jpg"
               }
@@ -86,34 +88,35 @@ const GetStarted = () => {
           </Link>
           <p
             type="button"
-            className="text-primaryColor md:block hidden cursor-pointer text-pretty px-7 py-1 rounded self-center"
+            className="lg:text-primaryColor text-secondaryColor cursor-pointer text-pretty px-7 py-1 rounded self-center"
           >
             Scroll to know more
           </p>
         </div>
         <div className="flex-1 lg:static absolute inset-0 -z-10">
           <Image
+            loading="lazy"
             src={require("@/public/images/gs5.jpg")}
             alt=""
             className="object-fill size-full"
             placeholder="blur"
-            priority
           />
         </div>
       </div>
-      <div className="md:flex hidden h-screen justify-center overflow-hidden relative">
+      <div className="flex h-screen justify-center overflow-hidden relative">
         <div
           id="gs2"
-          className="md:flex-1 py-12 md:px-10 px-5 md:size-full size-5/6 rounded-3xl m-auto flex justify-between flex-col gap-4 md:bg-transparent bg-white/50"
+          key="gs2"
+          className="md:flex-1 sm:py-12 md:px-10 px-5 md:size-full size-5/6 rounded-3xl m-auto flex justify-between flex-col gap-4 md:bg-transparent bg-white/50"
         >
           {/* Headline */}
           <div className="space-y-4">
-            <h1 className="text-primaryColor font-semibold text-center md:text-3xl text-xl">
-              Benifits
+            <h1 className="lg:text-primaryColor text-secondaryColor font-semibold text-center md:text-3xl text-xl">
+              Benefits
             </h1>
           </div>
-          <div className="bg-white p-10 flex flex-col justify-between size-full items-center rounded-3xl gap-7 flex-grow">
-            <div className="p-5 size-full space-y-2 bg-primaryColor/50 rounded-lg ">
+          <div className="bg-white sm:p-10 p-3 flex flex-col justify-between size-full items-center rounded-3xl gap-7 flex-grow">
+            <div className="p-3 size-full space-y-2 bg-primaryColor/50 rounded-lg ">
               <h3 className="text-xl text-white font-semibold text-center">
                 Co-create stories
               </h3>
@@ -121,7 +124,7 @@ const GetStarted = () => {
                 Team up with other writers and weave fantasical tales together.
               </p>
             </div>
-            <div className="p-5 size-full space-y-2 bg-primaryColor/50 rounded-lg ">
+            <div className="p-3 size-full space-y-2 bg-primaryColor/50 rounded-lg ">
               <h3 className="text-xl text-white font-semibold text-center">
                 Read and be inspired
               </h3>
@@ -129,7 +132,7 @@ const GetStarted = () => {
                 Dive into a world of stories by passionate writers.
               </p>
             </div>
-            <div className="p-5 size-full space-y-2 bg-primaryColor/50 rounded-lg ">
+            <div className="p-3 size-full space-y-2 bg-primaryColor/50 rounded-lg ">
               <h3 className="text-xl text-white font-semibold text-center">
                 Vote and influence
               </h3>
@@ -140,33 +143,34 @@ const GetStarted = () => {
           </div>
           <p
             type="button"
-            className="text-primaryColor cursor-pointer text-pretty px-7 py-1 rounded self-center"
+            className="lg:text-primaryColor text-secondaryColor cursor-pointer text-pretty px-7 py-1 rounded self-center"
           >
             Scroll to know more
           </p>
         </div>
         <div className="flex-1 lg:static absolute inset-0 -z-10">
           <Image
+            loading="lazy"
             src={require("@/public/images/gs8.jpg")}
             alt=""
             className="object-fill size-full"
             placeholder="blur"
-            priority
           />
         </div>
       </div>
-      <div className="md:flex hidden h-screen justify-center overflow-hidden relative">
+      <div className="flex h-screen justify-center overflow-hidden relative">
         <div
           id="gs3"
-          className="md:flex-1 py-12 md:px-10 px-5 md:size-full size-5/6 rounded-3xl m-auto flex justify-between flex-col gap-4 md:bg-transparent bg-white/50"
+          key="gs3"
+          className="md:flex-1 py-12 md:px-10 px-5 md:size-full size-5/6 rounded-3xl m-auto flex justify-between flex-col gap-4 sm:bg-transparent md:bg-white/50"
         >
           {/* Headline */}
           <div className="space-y-4">
-            <h1 className="text-primaryColor font-semibold text-center md:text-3xl text-xl">
+            <h1 className="lg:text-primaryColor hidden md:block text-secondaryColor font-semibold text-center md:text-3xl text-xl">
               How it works?
             </h1>
           </div>
-          <div className="bg-white p-10 flex justify-between w-full h-fit items-center rounded-3xl gap-7">
+          <div className="bg-white hidden p-10 md:flex justify-between w-full h-fit items-center rounded-3xl gap-7">
             <div className="p-5 w-full h-60 space-y-2 bg-primaryColor/50 rounded-lg ">
               <p className="text-white text-center">
                 Finds a story that sparks your imaginations and start
@@ -189,22 +193,22 @@ const GetStarted = () => {
           <Link
             type="button"
             href={"/auth/signup"}
-            className="bg-primaryColor text-white md:px-7 md:py-3 p-2 rounded self-center"
+            className="bg-primaryColor text-white sm:text-base text-[10px] md:px-7 md:py-3 p-2 rounded self-center"
           >
             Become a part of koalatale community
           </Link>
         </div>
         <div className="flex-1 lg:static absolute inset-0 -z-10">
           <Image
+            loading="lazy"
             src={require("@/public/images/gs9.jpg")}
             alt=""
             className="object-fill size-full"
             placeholder="blur"
-            priority
           />
         </div>
       </div>
-    </div>
+    </main>
   );
 };
 

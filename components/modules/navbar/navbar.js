@@ -7,6 +7,7 @@ import { IoIosMenu } from "react-icons/io";
 import SideNavbar from "../sidenavbar/SideNavbar";
 import Loader from "../loader/Loader";
 import { generateRandomColor } from "@/utils/randomColor";
+import Link from "next/link";
 
 const Navbar = ({ hasToken }) => {
   const { loading, error, userData } = usePersonalData();
@@ -31,12 +32,14 @@ const Navbar = ({ hasToken }) => {
           >
             <IoIosMenu />
           </button>
-          <Image
-            src={require("@/public/logo/text-logo.png")}
-            alt=""
-            priority
-            className="object-fill w-48 aspect-[4/1]"
-          />
+          <Link href={"/"}>
+            <Image
+              src={require("@/public/logo/text-logo.png")}
+              alt=""
+              priority
+              className="object-fill w-48 aspect-[4/1]"
+            />
+          </Link>
         </div>
         <div className="flex aspect-square w-12 justify-center items-center overflow-hidden rounded-full">
           {loading ? (
@@ -59,7 +62,7 @@ const Navbar = ({ hasToken }) => {
         onClick={() => setShowMenu(!showMenu)}
         className={`lg:hidden block ${
           showMenu ? "scale-x-100" : "scale-x-0 -translate-x-full"
-        } transform transition-all duration-300 ease-in-out fixed inset-0 size-full`}
+        } transform transition-all duration-300 z-10 ease-in-out fixed inset-0 size-full`}
       >
         <div
           className="h-full md:w-1/3 sm:w-1/2 w-5/6"

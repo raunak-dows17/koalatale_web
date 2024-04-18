@@ -37,4 +37,22 @@ export const UserData = {
       return Promise.reject(error.response?.data);
     }
   },
+
+  updateUserInfo: async (editedData) => {
+    try {
+      if (!TokenDetails.getToken()) {
+        return null;
+      }
+      const response = await instance.put(`/auth/user`, editedData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          token: TokenDetails.getToken(),
+        },
+      });
+
+      return Promise.resolve(response.data);
+    } catch (error) {
+      return Promise.reject(error?.response?.data);
+    }
+  },
 };

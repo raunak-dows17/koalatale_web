@@ -18,7 +18,7 @@ const ContributionCard = ({
   voteCount,
   votes,
   _id,
-  updatedAt,
+  createdAt,
   onClick,
 }) => {
   const router = useRouter();
@@ -43,7 +43,7 @@ const ContributionCard = ({
         handleVote(_id);
       }}
       onClick={onClick}
-      className={`size-full p-5 ${
+      className={`sm:text-base text-sm flex flex-col gap-3 size-full p-5 ${
         isMerged ? "bg-[#d2daec] border-2 border-[#2d4785]" : "bg-white"
       } rounded-md cursor-pointer`}
     >
@@ -51,7 +51,7 @@ const ContributionCard = ({
         {content} {isMerged && <IoCheckmark />}
       </div>
       <div className="w-full flex justify-between items-center gap-1">
-        <Moment fromNow>{updatedAt}</Moment>
+        <Moment fromNow>{createdAt}</Moment>
         {author?.profileImage || author?.username ? (
           <div className="flex items-center gap-1">
             <span>~by</span>
@@ -70,7 +70,7 @@ const ContributionCard = ({
         ) : null}
       </div>
       <hr />
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center size-full">
         <button
           type="button"
           onClick={(e) => {
@@ -90,14 +90,19 @@ const ContributionCard = ({
           {voteCount || vote?.voteCount || 0}
         </button>
         <div className="flex items-center">
-          {votes?.map((vote, index) => (
+          {votes?.slice(0, 4)?.map((vote) => (
             <img
-              key={index}
-              src={vote}
+              key={vote?._id}
+              src={vote?.profileImage}
               alt=""
-              className="flex justify-center items-center -mx-4 w-8 rounded-full aspect-square"
+              className="bg-slate-500 w-6 aspect-square -ml-3 shrink-0 rounded-full object-cover"
             />
           ))}
+          {votes?.length > 3 && (
+            <div className="bg-slate-500 w-6 text-xs aspect-square rounded-full object-cover">
+              +{votes?.length - 3}
+            </div>
+          )}
         </div>
       </div>
     </div>
