@@ -168,7 +168,7 @@ const UsersDetails = ({ username, _id }) => {
                       )}`
                     }
                     alt=""
-                    className="w-12 aspect-square rounded-full object-cover -z-10"
+                    className="w-12 aspect-square rounded-full object-cover"
                   />
                 )}
                 {_id ? (
