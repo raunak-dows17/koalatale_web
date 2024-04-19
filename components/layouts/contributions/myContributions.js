@@ -92,7 +92,7 @@ const MyContributions = () => {
         <LinearLoader />
       ) : userData?.contributions.length === 0 ? (
         <div className="text-red-500 font-medium flex items-center justify-center size-full">
-          No Contributions yet
+          No Contributions by you
         </div>
       ) : (
         <div className="grid lg:grid-cols-2 grid-cols-1 gap-5">
@@ -119,7 +119,7 @@ const MyContributions = () => {
                     setEditedContent({ editedContent, content: e.target.value })
                   }
                   id="content"
-                  className="w-full border-2 rounded px-2 border-primaryColor resize-none"
+                  className="w-full border-2 rounded px-2 border-primaryColor"
                 />
               ) : (
                 <p className={`text-lg`}>{contri?.content}</p>

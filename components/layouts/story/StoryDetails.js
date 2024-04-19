@@ -247,7 +247,7 @@ const StoryDetails = ({ _id }) => {
                         };
                         setEditedContent(updatedContent);
                       }}
-                      className="size-full px-3 py-1 rounded resize-none focus:outline-none"
+                      className="size-full px-3 py-1 rounded focus:outline-none"
                     />
                   ) : (
                     <p>{cont?.text}</p>
@@ -278,7 +278,7 @@ const StoryDetails = ({ _id }) => {
                   onBlur={addNewContent}
                   placeholder="And then what happend..."
                   onChange={(e) => setNewContent(e.target.value)}
-                  className="size-full px-3 py-1 rounded resize-none focus:outline-none"
+                  className="size-full px-3 py-1 rounded focus:outline-none"
                 />
               )}
             </div>
@@ -312,7 +312,7 @@ const StoryDetails = ({ _id }) => {
                       setContributionContent({ content: e.target.value })
                     }
                     placeholder={`Add your contribution to ${story?.title}`}
-                    className="resize-none focus:outline-none size-full"
+                    className="focus:outline-none size-full"
                   />
                   <button
                     disabled={!contributionContent?.content}
