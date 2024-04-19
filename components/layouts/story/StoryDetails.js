@@ -296,7 +296,13 @@ const StoryDetails = ({ _id }) => {
                     onClick={() => handleStoryMerge(contribution?._id)}
                   />
                 ))}
-              {story?.author?._id === userData?._id ? null : (
+              {story?.author?._id === userData?._id ? (
+                story?.contributions?.length === 0 && (
+                  <div className="size-full flex items-center justify-center text-red-500">
+                    No Contributions Yet
+                  </div>
+                )
+              ) : (
                 <div className="flex flex-col bg-white rounded p-3 size-full gap-2 items-end justify-end">
                   <textarea
                     name=""
@@ -322,7 +328,7 @@ const StoryDetails = ({ _id }) => {
           </div>
         )}
       </div>
-      <div className="md:col-span-1 col-span-full md:p-0 px-5">
+      <div className="md:col-span-1 col-span-full md:sticky top-16 md:p-0 px-5">
         <StoryRight
           {...story}
           userData={userData}

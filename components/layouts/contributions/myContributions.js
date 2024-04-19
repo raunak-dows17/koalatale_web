@@ -53,26 +53,37 @@ const MyContributions = () => {
   };
 
   const handleDelete = (contributionId) => {
-    handleDeleteContribution(contributionId)
-      .then((data) =>
-        Swal.fire({
-          icon: "success",
-          title: data?.message,
-          showConfirmButton: false,
-          timer: 1500,
-        }).then(() => {
-          fetchAgain();
-        })
-      )
-      .catch((err) =>
-        Swal.fire({
-          icon: "error",
-          title: "Error",
-          text: err?.message || err?.error || "Something went wrong",
-          showConfirmButton: false,
-          timer: 1500,
-        })
-      );
+    Swal.fire({
+      icon: "question",
+      title: "Are you sure?",
+      text: "Are you sure you want to delete this contribution.",
+      showCancelButton: true,
+      confirmButtonText: "Yes Delete",
+      cancelButtonText: "Not Now",
+    }).then((result) =>
+      result.isConfirmed
+        ? handleDeleteContribution(contributionId)
+            .then((data) =>
+              Swal.fire({
+                icon: "success",
+                title: data?.message,
+                showConfirmButton: false,
+                timer: 1500,
+              }).then(() => {
+                fetchAgain();
+              })
+            )
+            .catch((err) =>
+              Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: err?.message || err?.error || "Something went wrong",
+                showConfirmButton: false,
+                timer: 1500,
+              })
+            )
+        : Swal.close()
+    );
   };
 
   return (
