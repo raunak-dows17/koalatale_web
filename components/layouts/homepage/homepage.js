@@ -5,6 +5,7 @@ import StoryCard from "@/components/modules/story/StoryCard";
 import { useStories } from "@/utils/hooks/storyData";
 import { useRouter } from "next/navigation";
 import React from "react";
+import { FaCircleExclamation } from "react-icons/fa6";
 
 const Homepage = () => {
   const { stories, error, loading } = useStories();
@@ -20,11 +21,31 @@ const Homepage = () => {
           <LinearLoader />
         </div>
       ) : stories ? (
-        <div className="grid 2xl:grid-cols-3 xl:grid-cols-2 w-full gap-4 grid-cols-1 justify-center items-center">
-          {stories?.map((story) => (
-            <StoryCard {...story} key={story._id} />
-          ))}
-        </div>
+        stories?.length === 0 ? (
+          <div className="flex flex-col gap-5 size-full items-center justify-center">
+            <div className="text-red-600 flex items-center gap-1 font-semibold">
+              <span>
+                <FaCircleExclamation />
+              </span>{" "}
+              No Stories Uploaded Yet
+            </div>
+            <button
+              type="button"
+              onClick={() => {
+                router.push("/story/addstory");
+              }}
+              className="bg-primaryColor text-secondaryColor px-7 py-2 rounded"
+            >
+              Add your imagination
+            </button>
+          </div>
+        ) : (
+          <div className="grid 2xl:grid-cols-3 xl:grid-cols-2 w-full gap-4 grid-cols-1 justify-center items-center">
+            {stories?.map((story) => (
+              <StoryCard {...story} key={story._id} />
+            ))}
+          </div>
+        )
       ) : error ? (
         <div className="flex justify-center items-center size-full text-red-600 text-lg">
           {error?.message || error || "Something went wrong"}
