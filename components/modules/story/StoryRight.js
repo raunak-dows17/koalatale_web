@@ -25,13 +25,15 @@ const StoryRight = ({
     <div className="bg-white p-5 min-h-full space-y-5 flex flex-col md:rounded-none rounded">
       {userData?._id === author?._id && (
         <div className="flex justify-center items-center size-full gap-2">
-          <button
-            type="button"
-            onClick={() => (isEditing ? handleUpdate() : setIsEditing(true))}
-            className="px-5 py-1 rounded bg-primaryColor size-full text-secondaryColor"
-          >
-            {isEditing ? "Save" : "Edit"}
-          </button>
+          {!isCompleted && (
+            <button
+              type="button"
+              onClick={() => (isEditing ? handleUpdate() : setIsEditing(true))}
+              className="px-5 py-1 rounded bg-primaryColor size-full text-secondaryColor"
+            >
+              {isEditing ? "Save" : "Edit"}
+            </button>
+          )}
           <button
             type="button"
             onClick={() => {
