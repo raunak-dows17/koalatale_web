@@ -3,8 +3,10 @@
 import React from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { usePersonalData } from "@/utils/hooks/userData";
 
 const StoryCard = ({ author, content, contributions, title, _id, votes }) => {
+  const { userData, error, loading } = usePersonalData();
   const router = useRouter();
 
   return (
@@ -28,7 +30,11 @@ const StoryCard = ({ author, content, contributions, title, _id, votes }) => {
         <p
           onClick={(e) => {
             e.stopPropagation();
-            router.push(`/user/${author.username}`);
+            router.push(
+              author?._id === userData?._id
+                ? `/user/${userData?.username}/${userData?.email}/${userData?._id}`
+                : `/user/${author.username}`
+            );
           }}
           className="w-full text-end"
         >
