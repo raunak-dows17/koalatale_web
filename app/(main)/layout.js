@@ -33,7 +33,7 @@ export default function RootLayout({ children }) {
       <Navbar hasToken={hasToken} />
       <section className="flex flex-grow size-full">
         <div
-          className={`lg:w-1/4 max-h-screen sticky top-0 ${
+          className={`lg:w-1/4 max-h-screen shrink-0 sticky top-0 ${
             hasToken ? "lg:block hidden" : "hidden"
           }`}
         >

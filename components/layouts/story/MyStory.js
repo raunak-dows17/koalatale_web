@@ -42,7 +42,7 @@ const MyStory = () => {
           </div>
         )
       )}
-      <div className="grid 2xl:grid-cols-4 lg:grid-cols-3 gap-4 sm:grid-cols-2 grid-cols-1 justify-center items-center">
+      <div className="grid xl:grid-cols-2 w-full gap-4 grid-cols-1 justify-center items-center">
         {userData?.stories?.map((story, index) =>
           loading ? (
             <SkeletonLoader key={index} />

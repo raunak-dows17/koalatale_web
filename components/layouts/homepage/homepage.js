@@ -40,7 +40,7 @@ const Homepage = () => {
             </button>
           </div>
         ) : (
-          <div className="grid 2xl:grid-cols-3 xl:grid-cols-2 w-full gap-4 grid-cols-1 justify-center items-center">
+          <div className="grid xl:grid-cols-2 w-full gap-4 grid-cols-1 justify-center items-center">
             {stories?.map((story) => (
               <StoryCard {...story} key={story._id} />
             ))}
