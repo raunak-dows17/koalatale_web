@@ -1,5 +1,6 @@
+import { generateRandomColor } from "@/utils/randomColor";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const StoryRight = ({
   author,
@@ -14,6 +15,11 @@ const StoryRight = ({
   handleDeleteStory,
 }) => {
   const uniqueAuthors = new Set();
+  const [randomColor, setRandomColor] = useState(null);
+
+  useEffect(() => {
+    setRandomColor(generateRandomColor());
+  }, []);
 
   return (
     <div className="bg-white p-5 min-h-full space-y-5 flex flex-col md:rounded-none rounded">
