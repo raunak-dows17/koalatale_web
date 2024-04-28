@@ -1,12 +1,18 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { usePersonalData } from "@/utils/hooks/userData";
 
 const StoryCard = ({ author, content, contributions, title, _id, votes }) => {
   const { userData, error, loading } = usePersonalData();
+  const [randomColor, setRandomColor] = useState(null);
+
+  useEffect(() => {
+    setRandomColor(generateRandomColor());
+  }, []);
+
   const router = useRouter();
 
   return (
@@ -50,7 +56,12 @@ const StoryCard = ({ author, content, contributions, title, _id, votes }) => {
             {contributions?.slice(0, 3)?.map((contribution) => (
               <img
                 key={contribution?._id}
-                src={contribution.author?.profileImage}
+                src={
+                  contribution.author?.profileImage ||
+                  `https://dummyimage.com/100x100/${randomColor}/fff.png&text=${contribution.author?.name?.charAt(
+                    0
+                  )}`
+                }
                 alt=""
                 className="bg-slate-500 w-6 aspect-square shrink-0 -ml-3 rounded-full object-cover"
               />
