@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { usePersonalData } from "@/utils/hooks/userData";
+import { generateRandomColor } from "@/utils/randomColor";
 
 const StoryCard = ({ author, content, contributions, title, _id, votes }) => {
   const { userData, error, loading } = usePersonalData();
