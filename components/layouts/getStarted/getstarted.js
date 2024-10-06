@@ -112,7 +112,7 @@ const GetStarted = () => {
           {/* Headline */}
           <div className="space-y-4">
             <h1 className="lg:text-primaryColor text-secondaryColor font-semibold text-center md:text-3xl text-xl">
-              Benefits Here
+              Benefits
             </h1>
           </div>
           <div className="bg-white sm:p-10 p-3 flex flex-col justify-between size-full items-center rounded-3xl gap-7 flex-grow">
